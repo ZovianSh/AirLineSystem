@@ -1,0 +1,1 @@
+Booking(flight=null, flightClass=null, price=0.0, passenger=null, bookingDate=null, confirmed=false, bookings=null, filename=null)
