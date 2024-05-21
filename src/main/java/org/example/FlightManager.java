@@ -204,18 +204,6 @@ public class FlightManager {
                     }
                 }
 
-//                FlightClass flightClass;
-//                while (true) {
-//                    System.out.print("Enter flight class (ECONOMY, BUSINESS, FIRST_CLASS): ");
-//                    try {
-//                        flightClass = FlightClass.valueOf(scanner1.next().toUpperCase());
-//                        break;
-//                    } catch (IllegalArgumentException e) {
-//                        System.out.println("Invalid flight class. Please enter one of the following: ECONOMY, BUSINESS, FIRST_CLASS.");
-//                    }
-//                }
-
-
                 // Create a new Flight object
                 Flight flight = new Flight(flightNumber, departureDestination, arrivalDestination, departureDate, arrivalDate, departureTime, arrivalTime, availableSeats, baseTicketPrice);
 
@@ -307,50 +295,6 @@ public class FlightManager {
         }
     }
 
-//            double totalTicketPrice = calculateTicketPrice(ticketPrice, flightClass);
-//
-//            writer.println(flightNumber + "," + destination + "," + date + "," + time + "," + availableSeats + "," +
-//                    totalTicketPrice + "," + flightClass);
-//            System.out.println("Flight added successfully.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//
-//        flights.add(flight);
-//    }
-
-//    private static double calculateTicketPrice(double baseTicketPrice, String flightClass) {
-//        double discountedPrice = baseTicketPrice;
-//        Scanner scanner2 = new Scanner(System.in);
-//
-//        System.out.print("Enter passenger's age: ");
-//        int age = scanner.nextInt();
-//
-//        // Apply age discounts
-//        if (age < 5) {
-//            discountedPrice *= 0.5; // 50% discount for children under 5
-//        } else if (age < 10 || age > 65) {
-//            discountedPrice *= 0.8; // 20% discount for passengers aged under 10 or over 65
-//        }
-//
-//        // Apply class-specific discounts
-//        switch (flightClass) {
-//            case "business":
-//                discountedPrice *= 1.5; // 50% price increase for business class
-//                break;
-//            case "first_class":
-//                discountedPrice *= 2; // Double price for first class
-//                break;
-//            // No special discount for economy class
-//            default:
-//                break;
-//        }
-//
-//        return discountedPrice;
-//    }
-
-
     //remove a flight from the list
     public static void removeFlight() {
         Scanner scanner = new Scanner(System.in);
@@ -371,8 +315,6 @@ public class FlightManager {
 
             if (foundFlights.isEmpty()) {
                 System.out.println("No flights found for the provided destinations. Please try again.");
-//            removeFlight(); // Allow the user to try again
-//            return;
                 continue;
             }
 
@@ -385,8 +327,6 @@ public class FlightManager {
             int selectedFlightIndex = scanner.nextInt();
             if (selectedFlightIndex < 1 || selectedFlightIndex > foundFlights.size()) {
                 System.out.println("Invalid selection. Please try again.");
-                //removeFlight(); // Allow the user to try again
-                //return;
                 continue;
             }
 
@@ -397,7 +337,6 @@ public class FlightManager {
             writeFlightsToFile(flights);
 
             System.out.println("Flight removed successfully.");
-            //break; //exiting loop after successful removal
             System.out.print("Do you want to remove another flight? (yes/no): ");
             String anotherRemoval = scanner.next();
             if (!anotherRemoval.equalsIgnoreCase("yes")) {
@@ -424,8 +363,6 @@ public class FlightManager {
     private static void writeFlightsToFile(List<Flight> flights) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FLIGHTS_FILE))) {
             for (Flight flight : flights) {
-//                writer.write(flight.toString());
-//                writer.newLine();
                 writer.write(String.join(",",
                         flight.getFlightNumber(),
                         flight.getDepartureDestination(),
@@ -452,12 +389,6 @@ public class FlightManager {
             }
         }
         return foundFlights;
-    }
-
-
-    //get all flights
-    public ArrayList<Flight> getAllFlights() {
-        return flights;
     }
 
     // Method to update an existing flight
@@ -614,19 +545,6 @@ public class FlightManager {
                     }
                     break;
                 case 9:
-//                    while (true) {
-//                        System.out.print("Enter new flight class (ECONOMY, BUSINESS, FIRST_CLASS): ");
-//                        try {
-//                            FlightClass newFlightClass = FlightClass.valueOf(scanner.next().toUpperCase());
-//                            flightToUpdate.setFlightClass(newFlightClass);
-//                            isUpdated = true;
-//                            break;
-//                        } catch (IllegalArgumentException e) {
-//                            System.out.println("Invalid flight class. Please enter one of the following: ECONOMY, BUSINESS, FIRST_CLASS.");
-//                        }
-//                    }
-//                    break;
-//                case 10:
                     System.out.println("Exiting update process...");
                     return;
                 default:

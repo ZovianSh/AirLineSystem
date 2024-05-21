@@ -2,15 +2,10 @@ package org.example;
 
 import java.util.*;
 
-import static org.example.Employee.employeeMenu;
 import static org.example.FlightManager.*;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-//        flights.add(new Flight("FL123", "New York", new Date(), "08:00", 100, 200.0, FlightClass.ECONOMY));
-//        flights.add(new Flight("FL456", "Los Angeles", new Date(), "10:00", 150, 300.0, FlightClass.BUSINESS));
         Scanner scanner = new Scanner(System.in);
         loadCredentials();
         mainMenu(scanner);
@@ -51,16 +46,6 @@ public class Main {
                         } else {
                             System.out.println("Invalid login credentials. Try again!");
                         }
-//                    System.out.println("Please enter your login ID:");
-//                    String employeeId = scanner.next();
-//                    System.out.println("Please enter your password:");
-//                    String employeePassword = scanner.next();
-//
-//                    if (Employee.authenticateEmployee(employeeId, employeePassword)) {
-//                        // Employee menu
-//                        employeeMenu(scanner);
-//                    } else {
-//                        System.out.println("Invalid login credentials. Try again.");
                     }
                     break;
                 case 2:
@@ -69,9 +54,6 @@ public class Main {
                     break;
                 case 3:
                     // Flight manager login
-
-
-
                     boolean authenticated1 = false;
                     while (!authenticated1) {
                         System.out.println("Please enter your login ID:");
@@ -93,22 +75,5 @@ public class Main {
                     // This default case is unreachable because of the validation loop
                     System.out.println("Invalid option.Try again!");
             }
-
         }
-
-
-
-    //
-    public static double calculateTotalPrice(String ticketPriceStr, String additionalFeeStr) {
-    double ticketPrice = Double.parseDouble(ticketPriceStr);
-    double additionalFee = Double.parseDouble(additionalFeeStr);
-    return ticketPrice + additionalFee;
-    }
-
-    public static boolean authenticateUser(String username, String password) {
-        // Authentication logic
-        return false; // Example: Authentication always fails
-
-    }
-
 }

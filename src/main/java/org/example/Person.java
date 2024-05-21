@@ -81,11 +81,6 @@ public abstract class Person {
         return flights;
     }
 
-
-        // Display the flight manager menu again
-//        System.out.println("Going back to Flight Manager Menu...");
-//        managerMenu(scanner);
-
     public void searchFlights(String departureDestination, String arrivalDestination, Scanner scanner){
         System.out.println("Searching flights...");
         List<Flight> flights = readFlightsFromFile();
@@ -148,17 +143,24 @@ public abstract class Person {
                 System.out.println("1. Try Again");
                 System.out.println("2. Back to Menu");
                 System.out.print("Enter your choice: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                if (choice == 1) {
-                    continue;
-                } else {
-                    if (this instanceof Employee) {
-                        ((Employee) this).employeeMenu(scanner);
+                if (scanner.hasNextInt()) {
+                    int choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    if (choice == 1) {
+                        continue;
+                    } else if (choice == 2) {
+                        if (this instanceof Employee) {
+                            ((Employee) this).employeeMenu(scanner);
+                        } else {
+                            passengerMenu(scanner);
+                        }
+                        return;
                     } else {
-                        passengerMenu(scanner);
+                        System.out.println("Incorrect answer. Please enter 1 or 2.");
                     }
-                    return;
+                } else {
+                    System.out.println("Incorrect answer. Please enter 1 or 2.");
+                    scanner.next(); // Consume invalid input
                 }
             } else {
                 System.out.println("Matching Flights:");

@@ -68,95 +68,11 @@ public class Passenger extends Person {
         }
     }
 
-    @Override
-    public void viewFlights() {
-        System.out.println("Viewing available flights...");
-        // Logic to display all available flights
-        // You may read from a file or a database here and display the list of flights
-    }
-
 //    @Override
-//    public void searchFlights() {
-//
+//    public void viewFlights() {
+//        System.out.println("Viewing available flights...");
+//        // Logic to display all available flights
+//        // You may read from a file or a database here and display the list of flights
 //    }
 
-//    @Override
-//    public void bookFlight(Scanner scanner) {
-//        System.out.println("Booking a flight...");
-//        // Logic to book a flight
-//        // You may prompt the user for flight details and save the booking
-//    }
-//    @Override
-//    public void viewBookingDetails(Scanner scanner) {
-//
-//    }
-
-//    @Override
-//    public void cancelBooking(Scanner scanner) {
-//        System.out.println("Cancelling a booking...");
-//        // Logic to cancel a booking
-//        // You may prompt the user for booking details and remove the booking
-//    }
-
-
-
-    //other methods
-//    public void displayPassengerDetails() {
-//        System.out.println("Passenger Name: " + getLastName(), getFirstName());
-//        System.out.println("Passenger Age: " + age);
-//        System.out.println("Contact Details: " + contactDetails);
-//    }
-
-    //method to provide contact details
-    public void provideContactDetails(String phoneNumber, String email) {
-        // Implement logic to update contact details
-    }
-    //method to make a booking
-//    public void makeBooking(FlightManager flightManager, String destination, Date date, int passengers) {
-//        List<Flight> availableFlights = flightManager.searchFlights(/*destination, date, passengers*/flights, departureDestination, arrivalDestination);
-//        if (!availableFlights.isEmpty()) {
-//            // Assume we choose the first available flight for simplicity
-//            Flight selectedFlight = availableFlights.get(0);
-//            Booking booking = new Booking(this, selectedFlight, new Date());
-//            bookings.add(booking);
-//            System.out.println("Booking successful!");
-//        } else {
-//            System.out.println("No available flights for the specified criteria.");
-//        }
-//    }
-
-    public void updateContactDetails(String email) {
-
-        //this.email = email;
-    }
-
-    public void updateBooking(Flight newFlight, Booking booking) {
-        //this.bookedFlight = newFlight;
-    }
-
-
-
-
-//
-//    @Override
-//    public String toString() {
-//        return "Passenger: " + getFirstName() + " " + lastName + ", Age: " + age + ", Contact: " + phoneNumber + ", " + email;
-//    }
-
-    // Calculate ticket price based on flight class percentage of base price
-//    double ticketPrice = calculatePrice(baseTicketPrice, flightClass);
-//
-//    // Function to calculate price based on flight class percentage of base price
-//    private static double calculatePrice(double basePrice, FlightClass flightClass) {
-//        switch (flightClass) {
-//            case ECONOMY:
-//                return basePrice * 0.8; // 80% of base price for economy class
-//            case BUSINESS:
-//                return basePrice * 1.2; // 120% of base price for business class
-//            case FIRST_CLASS:
-//                return basePrice * 1.5; // 150% of base price for first class
-//            default:
-//                return basePrice; // Default to base price if unknown class
-//        }
-//    }
 }
