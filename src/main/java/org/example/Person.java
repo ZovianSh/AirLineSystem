@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
+import static org.example.Employee.employeeMenu;
 import static org.example.Passenger.passengerMenu;
 
 
@@ -81,6 +81,10 @@ public abstract class Person {
         return flights;
     }
 
+    public boolean isEmployee() {
+        return false; // By default, a person is not an employee
+    }
+
     public void searchFlights(String departureDestination, String arrivalDestination, Scanner scanner){
         System.out.println("Searching flights...");
         List<Flight> flights = readFlightsFromFile();
@@ -96,7 +100,7 @@ public abstract class Person {
         if (matchingFlights.isEmpty()) {
             System.out.println("No matching flights found.");
             System.out.println("1. Try Again");
-            System.out.println("2. Back to Employee Menu");
+            System.out.println("2. Back to Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             if (choice == 1) {
@@ -106,10 +110,26 @@ public abstract class Person {
                 String newArrivalDestination = scanner.next();
                 searchFlights(newDepartureDestination, newArrivalDestination, scanner);
             } else if (choice == 2) {
-                return;
+                if (isEmployee()) {
+                    // Return to Employee Menu
+                    System.out.println("Returning to Employee Menu...");
+                    employeeMenu(scanner);
+                } else {
+                    // Return to Passenger Menu
+                    System.out.println("Returning to Passenger Menu...");
+                    passengerMenu(scanner);
+                }
             } else {
-                System.out.println("Invalid choice. Returning to Employee Menu.");
-                return;
+                System.out.println("Invalid choice. Returning to Menu.");
+                if (isEmployee()) {
+                    // Return to Employee Menu
+                    System.out.println("Returning to Employee Menu...");
+                    employeeMenu(scanner);
+                } else {
+                    // Return to Passenger Menu
+                    System.out.println("Returning to Passenger Menu...");
+                    passengerMenu(scanner);
+                }
             }
         } else {
             System.out.println("Matching Flights:");
@@ -150,7 +170,7 @@ public abstract class Person {
                         continue;
                     } else if (choice == 2) {
                         if (this instanceof Employee) {
-                            ((Employee) this).employeeMenu(scanner);
+                            employeeMenu(scanner);
                         } else {
                             passengerMenu(scanner);
                         }
@@ -174,6 +194,7 @@ public abstract class Person {
                 while (flightChoice < 1 || flightChoice > matchingFlights.size()) {
                     System.out.print("Invalid choice. Choose a flight by number: ");
                     flightChoice = scanner.nextInt();
+                    scanner.nextLine();
                 }
                 Flight chosenFlight = matchingFlights.get(flightChoice - 1);
 
@@ -224,7 +245,6 @@ public abstract class Person {
                 double finalPrice = basePrice * classMultiplier * (1 - discount);
 
                 if (this instanceof Employee) {
-                    Employee employee = (Employee) this;
                     System.out.print("Enter your years of service: ");
                     int yearsOfService = scanner.nextInt();
                     while (yearsOfService < 0) {
@@ -262,7 +282,7 @@ public abstract class Person {
                 saveBooking(firstName, lastName, age, email, cardNumber, pin, flightClass, chosenFlight);
 
                 if (this instanceof Employee) {
-                    ((Employee) this).employeeMenu(scanner);
+                    employeeMenu(scanner);
                 } else {
                     passengerMenu(scanner);
                 }
@@ -275,10 +295,10 @@ public abstract class Person {
                              FlightClass flightClass, Flight chosenFlight) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(BOOKINGS_FILE, true))) {
             writer.write(firstName + "," + lastName + "," + age + "," + email + "," + cardNumber.substring(0, 4)
-                    + " **** **** ****," + pin.charAt(0) + "*** ," + flightClass + ", [" + chosenFlight.getFlightNumber() + ","
+                    + " **** **** ****," + pin.charAt(0) + "*** ," + flightClass + "," + chosenFlight.getFlightNumber() + ","
                     + chosenFlight.getDepartureDestination() + "," + chosenFlight.getArrivalDestination() + ","
                     + DATE_FORMAT.format(chosenFlight.getDepartureDate()) + "," + DATE_FORMAT.format(chosenFlight.getArrivalDate()) + ","
-                    + chosenFlight.getDepartureTime() + "," + chosenFlight.getArrivalTime() + "]");
+                    + chosenFlight.getDepartureTime() + "," + chosenFlight.getArrivalTime());
             writer.newLine();
         } catch (IOException e) {
             System.out.println("An error occurred while saving the booking: " + e.getMessage());
@@ -353,7 +373,7 @@ public abstract class Person {
         }
 
         if (this instanceof Employee) {
-            ((Employee) this).employeeMenu(scanner);
+            employeeMenu(scanner);
         } else {
             passengerMenu(scanner);
         }
@@ -442,10 +462,11 @@ public abstract class Person {
                 System.out.print("Enter new card PIN: ");
                 String pin = scanner.next();
                 bookingParts[4] = cardNumber.substring(0, 4) + "**** **** ****";
+                bookingParts[5] = pin.charAt(0) + "***";
                 break;
             case 5:
                 System.out.print("Choose a new flight class (ECONOMY, BUSINESS, FIRST_CLASS): ");
-                bookingParts[5] = scanner.next().toUpperCase();
+                bookingParts[6] = scanner.next().toUpperCase();
                 break;
             case 6:
                 List<Flight> flights = readFlightsFromFile();
