@@ -11,6 +11,12 @@ import java.util.Scanner;
 @Setter
 @ToString
 public class Passenger extends Person {
+
+    @Override
+    public boolean isEmployee() {
+        return false; // Passenger is not an employee
+    }
+
     //constructor
     public Passenger(String firstName, String lastName, int age, String email) {
         super(firstName, lastName, age, email);

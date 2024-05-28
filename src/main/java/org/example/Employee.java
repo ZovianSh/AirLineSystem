@@ -19,6 +19,11 @@ public class Employee extends Person {
     private static final String CREDENTIALS_FILE = "C:/Users/dzovi/Desktop/credentials.txt";
     private static final Map<String, String> credentials = new HashMap<>();
 
+    @Override
+    public boolean isEmployee() {
+        return true; // Employee is an employee
+    }
+
     //Constructor
     public Employee(String firstName, String lastName, int age, String email, String employeeId, String password, String workPosition, double discount) {
         super(firstName, lastName, age, email);
